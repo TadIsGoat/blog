@@ -16,11 +16,12 @@ h2, h3, h4, h5, h6, label {
 
 p {
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 a {
   color: #ff61bd;
+  text-decoration: none;
 }
 
 table {
@@ -55,10 +56,10 @@ td form {
   gap: 10px;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   width: 150px;
   padding: 5px;
-  border: 1px solid #ced4da;
+  border: 1px solid #ff61bd;
   border-radius: 4px;
 }
 
@@ -68,6 +69,7 @@ button {
   border-radius: 1px;
   cursor: pointer;
   color: #ff61bd;
+  font-weight: 600;
 }
 
 button:hover {

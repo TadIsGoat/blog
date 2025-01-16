@@ -2,10 +2,15 @@
 
 include 'db.php';
 
-if ($_SESSION['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
     $username = trim($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     
+    $stmt = $pdo->prepare("INSERT INTO users (username, password, role, can_edit) VALUES (?, ?, 'user', 0)");
+    $stmt->execute([$username, $password]);
+
+    header("Location: login.php");
+    exit;
 }
 ?>
 
@@ -14,7 +19,7 @@ if ($_SESSION['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrace</title>
+    <title>Sign in</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -30,7 +35,7 @@ if ($_SESSION['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
             <button type="submit" name="register">Register</button>
         </form>
 
-        <p>Do you already have an account?<a href="login.php">Login</a></p>
+        <p>Do you already have an account? <a href="login.php">Login</a></p>
         <p><a href="index.php">Back to home page</a></p>
     </div>
 </body>
