@@ -1,3 +1,10 @@
+<?php
+
+include 'db.php';
+include 'auth.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -10,8 +17,14 @@
     <h1>jklasdofsldaibfhlbg</h1>
     <div class="menu">
     <div style="text-align: center; margin-bottom: 20px;">
+
+    <?php if(isAuth()): ?>
+        <span>Hiii, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+        <a href="logout.php"><button>Log out</button></a>
+    <?php else: ?>
         <a href="login.php"><button>Log in</button></a>
         <a href="register.php"><button>Sign in</button></a>
+    <?php endif; ?>
     </div>
     </div>
     <h2>Add new product</h2>

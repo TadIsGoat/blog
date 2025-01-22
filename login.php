@@ -1,3 +1,27 @@
+<?php
+
+include "db.php";
+include "auth.php";
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if($user && password_verify($password, $user['password'])) {
+        $_SESSION["user"] = $user;
+        header("Location: index.php");
+        exit;
+    } else {
+        $error = "wrong username or password";
+    }
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="cs">
@@ -10,6 +34,11 @@
 <body>
     <div class="form-container">
         <h1>Log in</h1>
+
+        <?php if(isset($error)): ?>
+            <p class="error"><?= htmlspcialchars($error) ?></p>
+        <?php endif; ?>
+
         <form method="POST" action="">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
