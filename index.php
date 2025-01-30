@@ -86,7 +86,38 @@ $products = getProducts($pdo);
 
     </table>
 
+    <?php if (isAdmin()): ?>
     <h2>User administartion</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Editing allowed</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            $stmt = $pdo->query("SELECT id, username, role, can_edit FROM users");
+            $users = $stmt->fetchAll();
+            foreach ($users as $user): ?>
+                <tr>
+                    <td><?= htmlspecialchars($user['id']) ?></td>
+                    <td><?= htmlspecialchars($user['username']) ?></td>
+                    <td><?= htmlspecialchars($user['role']) ?></td>
+                    <td><?= $user['can_edit'] ? 'Yup' : 'Nei' ?></td>
+                    <td>
+                        <form method="POST" action="users_actions.php">
+                            <input type="hidden" name="action" value="toggle_permission">
+                            <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                            <button type="submit">
+                                <?= $user['can_edit'] ? 'Deny' : 'Allow' ?>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
 
 </body>
 </html>
