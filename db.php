@@ -17,4 +17,20 @@ try {
     die("Database connection failed:" . $e->getMessage());
 }
 
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+    if (isset($_POST['action'])) {
+        switch ($_POST['action']) {
+            case 'export':
+
+                break;
+            case 'import':
+
+                break;
+            default:
+                die("You can't do that!");
+                break;
+        }
+    }
+}
+
 ?>
