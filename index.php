@@ -119,20 +119,21 @@ $products = getProducts($pdo);
         </table>
 
         <h2>Database export import</h2>
-            <form method="POST" action="db.php">
-                <label for="export">Export</label>
-                <select name="action">
-                    <option value="exportProducts">products</option>
-                    <option value="exportUsers">users</option>
-                </select>
-                <button type="submit">Export</button>   
-            </form>
-            </br>
-            <form method="POST" action="db.php">
-                <label for="import">Import</label>
-                <input type="file" name="action" value="import" required>
-                <button type="submit">Import</button>
-            </form>
+    <form method="POST" action="db.php">
+        <label for="export">Export</label>
+        <select name="action">
+            <option value="exportUsers">Export Users</option>
+            <option value="exportProducts">Export Products</option>
+        </select>
+        <button type="submit">Export</button>   
+    </form>
+    <br>
+    <form method="POST" action="db.php" enctype="multipart/form-data">
+        <label for="import">Import</label>
+        <input type="hidden" name="action" value="import">
+        <input type="file" name="import_file" required>
+        <button type="submit">Import</button>
+    </form>
     <?php endif; ?>
 
 </body>
