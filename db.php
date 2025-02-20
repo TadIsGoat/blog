@@ -18,8 +18,8 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    if (isset($_POST['action'])) {
-        switch ($_POST['action']) {
+    if (isset($_POST['otherAction'])) {
+        switch ($_POST['otherAction']) {
             case 'exportUsers':
                 exportTables($pdo, ['users']);
                 break;
@@ -69,7 +69,7 @@ function importTables($pdo, $files) {
                 $pdo->exec("INSERT INTO $table ($columns) VALUES ($values)");
             }
             echo "Imported $table from $file<br>";
-        } else {
+        } else {    
             echo "File $file does not exist<br>";
         }
     }

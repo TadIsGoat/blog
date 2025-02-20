@@ -48,7 +48,6 @@ $products = getProducts($pdo);
 
     <h2>Product list</h2>
     <table>
-
         <tr>
             <th>ID</th>
             <th>Název</th>
@@ -104,7 +103,7 @@ $products = getProducts($pdo);
                     <td><?= htmlspecialchars($user['id']) ?></td>
                     <td><?= htmlspecialchars($user['username']) ?></td>
                     <td><?= htmlspecialchars($user['role']) ?></td>
-                    <td><?= $user['can_edit'] ? 'Yup' : 'Nei' ?></td>
+                    <td><?= $user['can_edit'] ? 'Yes' : 'No' ?></td>
                     <td>
                         <form method="POST" action="users_actions.php">
                             <input type="hidden" name="action" value="toggle_permission">
@@ -118,22 +117,22 @@ $products = getProducts($pdo);
             <?php endforeach; ?>
         </table>
 
-        <h2>Database export import</h2>
-    <form method="POST" action="db.php">
-        <label for="export">Export</label>
-        <select name="action">
-            <option value="exportUsers">Export Users</option>
-            <option value="exportProducts">Export Products</option>
-        </select>
-        <button type="submit">Export</button>   
-    </form>
-    <br>
-    <form method="POST" action="db.php" enctype="multipart/form-data">
-        <label for="import">Import</label>
-        <input type="hidden" name="action" value="import">
-        <input type="file" name="import_file" required>
-        <button type="submit">Import</button>
-    </form>
+    <h2>Database export import</h2>
+        <form method="POST" action="db.php">
+            <label for="export">Export</label>
+            <select name="otherAction">
+                <option value="exportUsers">Export Users</option>
+                <option value="exportProducts">Export Products</option>
+            </select>
+            <button type="submit">Export</button>   
+        </form>
+        <br>
+        <form method="POST" action="db.php" enctype="multipart/form-data">
+            <label for="import">Import</label>
+            <input type="hidden" name="otherAction" value="import">
+            <input type="file" name="import_file" required>
+            <button type="submit">Import</button>
+        </form>
     <?php endif; ?>
 
 </body>
