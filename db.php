@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                 }
                 break;
             default:
-                die("<script>alert('You can\'t do that!'); window.location.href='index.php';</script>");
+                die("<script>alert('You can't do that!'); window.location.href='index.php';</script>");
                 break;
         }
     }
