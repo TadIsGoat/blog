@@ -16,12 +16,12 @@ $products = getProducts($pdo);
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>jklasdofsldaibfhlbg</h1>
+    <h1>Product manager</h1>
     <div class="menu">
         <div style="text-align: center; margin-bottom: 20px;">
 
         <?php if(isAuth()): ?>
-            <span>Hiii, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
+            <span>Hi, <?= htmlspecialchars($_SESSION['user']['username']) ?></span>
             <a href="logout.php"><button>Log out</button></a>
         <?php else: ?>
             <a href="login.php"><button>Log in</button></a>
@@ -50,8 +50,8 @@ $products = getProducts($pdo);
     <table>
         <tr>
             <th>ID</th>
-            <th>Název</th>
-            <th>Popis</th>
+            <th>Name</th>
+            <th>Description</th>
             <?php if (isAuth() && hasPerm()): ?><th>Action</th><?php endif; ?>
         </tr>
 

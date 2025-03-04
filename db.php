@@ -14,7 +14,7 @@ $options = [
 try {
     $pdo = new PDO($conn, $username, $password, $options);
 } catch (PDOException $e) {
-    die("Database connection failed:" . $e->getMessage());
+    die("<script>alert('Database connection failed: " . $e->getMessage() . "'); window.location.href='index.php';</script>");
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
@@ -34,14 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
                     if (move_uploaded_file($fileTmpPath, $destPath)) {
                         importTables($pdo, [$fileName]);
                     } else {
-                        echo "There was an error moving the uploaded file.";
+                        echo "<script>alert('There was an error moving the uploaded file.'); window.location.href='index.php';</script>";
                     }
                 } else {
-                    echo "No file uploaded or there was an upload error.";
+                    echo "<script>alert('No file uploaded or there was an upload error.'); window.location.href='index.php';</script>";
                 }
                 break;
             default:
-                die("You can't do that!");
+                die("<script>alert('You can\'t do that!'); window.location.href='index.php';</script>");
                 break;
         }
     }
@@ -53,7 +53,7 @@ function exportTables($pdo, $tables) {
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $filename = "$table.json";
         file_put_contents($filename, json_encode($rows));
-        echo "Exported $table to $filename<br>";
+        echo "<script>alert('Exported $table to $filename'); window.location.href='index.php';</script>";
     }
 }
 
@@ -68,9 +68,9 @@ function importTables($pdo, $files) {
                 $values = implode(", ", array_map([$pdo, 'quote'], array_values($row)));
                 $pdo->exec("INSERT INTO $table ($columns) VALUES ($values)");
             }
-            echo "Imported $table from $file<br>";
+            echo "<script>alert('Imported $table from $file'); window.location.href='index.php';</script>";
         } else {    
-            echo "File $file does not exist<br>";
+            echo "<script>alert('File $file does not exist'); window.location.href='index.php';</script>";
         }
     }
 }
